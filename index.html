@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>charter.Y</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div class="logo">charter.<span>Y</span></div>
+    <div class="top-act">
+      <button onclick="go('search')" aria-label="Cari">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </button>
+      <button onclick="go('profile')" aria-label="Profil">
+        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.5 3.8-7 8-7s8 2.5 8 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <section class="page on" id="page-home">
+    <div class="hero">
+      <div class="hero-content">
+        <h1>Download TikTok Tanpa Watermark</h1>
+        <p>Paste link, jadi MP4 & MP3, gratis no iklan.</p>
+      </div>
+    </div>
+
+    <div class="fitur">
+      <div class="fcard" onclick="go('download')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 19h16"/></svg>
+        <b>Downloader</b>
+        <span>Video</span>
+      </div>
+      <div class="fcard" onclick="go('search')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <b>Pencarian</b>
+        <span>Video, Foto, User</span>
+      </div>
+      <div class="fcard" onclick="go('ai')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 7V4"/><path d="M8 4h8"/><circle cx="9" cy="13" r="1.2" fill="currentColor"/><circle cx="15" cy="13" r="1.2" fill="currentColor"/></svg>
+        <b>AI</b>
+        <span>Nexus Sealyn.</span>
+      </div>
+    </div>
+
+    <div class="sponsor-card" onclick="window.open('https://genshin.hoyoverse.com/cloud','_blank')">
+      <div class="sponsor-badge">SPONSORED</div>
+      <div class="sponsor-top">
+        <div class="sponsor-logo">
+          <svg viewBox="0 0 48 48" fill="none">
+            <path d="M24 4L42 14v20L24 44L6 34V14L24 4z" stroke="#4db2ff" stroke-width="2.5" fill="#0b1e33"/>
+            <path d="M24 13l11 6.5v13L24 39l-11-6.5v-13L24 13z" fill="#4db2ff"/>
+            <circle cx="24" cy="25.5" r="4.5" fill="#eaf6ff"/>
+          </svg>
+        </div>
+        <div class="sponsor-text">
+          <b>Genshin Impact Cloud</b>
+          <p>Main langsung di browser, tanpa install. Hemat 20GB storage HP kamu.</p>
+          <span class="sponsor-cta">Buka Web Cloud
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="page-download">
+    <div class="card">
+      <h3>Paste Link TikTok</h3>
+      <input id="link" placeholder="https://www.tiktok.com/@user/video/...">
+      <p id="err"></p>
+      <button class="btn-pink" onclick="fetchV()">Download</button>
+      <div id="res">
+        <video id="rv" controls></video>
+        <b id="rt"></b>
+        <p id="rm"></p>
+        <div class="dlrow">
+          <a id="dmp4" href="#" target="_blank">Download MP4</a>
+          <a id="dmp3" href="#" target="_blank">Download MP3</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="page-search">
+    <div class="sbar">
+      <input id="searchInput" placeholder="Cari video, user...">
+      <button onclick="doSearch()">Cari</button>
+    </div>
+    <div class="stabs">
+      <button class="on" onclick="setSearchType('all',this)">Semua</button>
+      <button onclick="setSearchType('video',this)">Video</button>
+      <button onclick="setSearchType('foto',this)">Foto</button>
+      <button onclick="setSearchType('user',this)">User</button>
+    </div>
+    <div id="searchResult"><p class="empty">Ketik kata kunci dulu</p></div>
+  </section>
+
+  <section class="page" id="page-ai">
+    <div class="ai-wrap">
+      <iframe src="https://nexus-sealyn-ai-deve-m9l5.bolt.host/" frameborder="0"></iframe>
+    </div>
+  </section>
+
+  <section class="page" id="page-profile">
+    <div class="cover">
+      <img id="coverImg" src="https://picsum.photos/800/300?random=50">
+      <label class="cover-badge">Ganti Banner <input type="file" accept="image/*" style="display:none" onchange="handleCoverChange(event)"></label>
+    </div>
+    <div class="p-head">
+      <img class="avatar" id="avatar" src="https://i.pravatar.cc/150?u=charter.y" onclick="document.getElementById('avatarInput').click()">
+      <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="handleAvatarChange(event)">
+      <button class="btn-edit" onclick="openEdit()">Edit Profil</button>
+    </div>
+    <div id="pName">Charter User</div>
+    <div class="uname" id="pUser">@charter.y</div>
+    <div class="bio" id="pBio">Bandung. Suka ngulik preset & video.</div>
+    <div class="stats">
+      <div><b id="sFollowing">180</b><span>Mengikuti</span></div>
+      <div><b id="sFollowers">1,2rb</b><span>Pengikut</span></div>
+    </div>
+    <div class="card">
+      <h4>Login</h4>
+      <input id="loginUser" placeholder="username kamu">
+      <button class="btn-pink" onclick="doLogin()">Masuk</button>
+      <button class="btn-tiktok" onclick="loginTikTok()">Connect TikTok</button>
+    </div>
+  </section>
+
+  <nav class="bottom">
+    <button class="on" data-p="home" onclick="go('home')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h5v-6h4v6h5V9.5"/></svg>
+      <span>Beranda</span>
+    </button>
+    <button data-p="search" onclick="go('search')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <span>Cari</span>
+    </button>
+    <button data-p="download" onclick="go('download')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 19h16"/></svg>
+      <span>Download</span>
+    </button>
+    <button data-p="ai" onclick="go('ai')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 7V4"/><path d="M8 4h8"/><circle cx="9" cy="13" r="1.2" fill="currentColor"/><circle cx="15" cy="13" r="1.2" fill="currentColor"/></svg>
+      <span>AI</span>
+    </button>
+    <button data-p="profile" onclick="go('profile')">
+      <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.5 3.8-7 8-7s8 2.5 8 7"/></svg>
+      <span>Profil</span>
+    </button>
+  </nav>
+</div>
+
+<div class="modal" id="editModal">
+  <div class="mbox">
+    <div class="mhead"><b>Edit Profil</b><button onclick="closeEdit()">X</button></div>
+    <input id="fName" placeholder="Nama">
+    <input id="fUser" placeholder="Username">
+    <textarea id="fBio" placeholder="Bio"></textarea>
+    <button class="btn-pink" onclick="saveEdit()">Simpan</button>
+    <button class="btn-ghost" onclick="closeEdit()">Batal</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
